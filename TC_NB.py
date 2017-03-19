@@ -4,7 +4,7 @@
 #	Kuldeep Sharma (19/03/2017)					
 #	Mechanical Engineer @ IIT Delhi			
 #													
-#	Github @Kuldeep_Attri						     
+#	Github @Kuldeep-Attri						     
 #												   
 #################################################	
 
