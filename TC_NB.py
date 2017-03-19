@@ -1,10 +1,10 @@
 #########################################################
-#														#
-#	Text Classification using Naive Bayes  				#
-#	Kuldeep Sharma (kuldeepsharma1312@gmail.com)		#
-#	Mechanical Engineer @ IIT Delhi						#
-#	Github -- @Kuldeep_Attri							#
-#														#
+#							#
+#	Text Classification using Naive Bayes  		#
+#	Kuldeep Sharma (kuldeepsharma1312@gmail.com)	#
+#	Mechanical Engineer @ IIT Delhi			#
+#	Github -- @Kuldeep_Attri			#
+#							#
 #########################################################
 
 
