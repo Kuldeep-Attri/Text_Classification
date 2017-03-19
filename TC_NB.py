@@ -1,13 +1,3 @@
-#########################################################
-#							#
-#	Text Classification using Naive Bayes  		#
-#	Kuldeep Sharma (kuldeepsharma1312@gmail.com)	#
-#	Mechanical Engineer @ IIT Delhi			#
-#	Github -- @Kuldeep_Attri			#
-#							#
-#########################################################
-
-
 
 import numpy as np
 import scipy as sp
@@ -16,7 +6,7 @@ import sklearn
 
 
 ###########################################################################
-			# Loading data	
+						# Loading data	
 
 results = []
 with open('trainfile.txt') as inputfile:
@@ -38,14 +28,13 @@ for i in range(len(results)):
 		elif(results[i][0]=="course"):
 			train_tag.append(3)
 			train_data.append(results[i][1])	
+from sklearn.feature_extraction.text import CountVectorizer
+vectorizer = CountVectorizer()
+train_data=vectorizer.fit_transform(train_data)
 
 with open('testfile.txt') as inputfile:
     for line in inputfile:
-        results.append(line.strip().split('\t'))
-
-from sklearn.feature_extraction.text import CountVectorizer
-vectorizer = CountVectorizer()
-train_data=vectorizer.fit_transform(train_data)        
+        results.append(line.strip().split('\t'))       
 
 test_tag =[];test_data=[];
 for i in range(len(results)):
@@ -63,42 +52,44 @@ for i in range(len(results)):
 			test_tag.append(3)
 			test_data.append(results[i][1])					
 	
-
-test_data=vectorizer.transform(test_data)
-
 k=4; # Number of classes
+ 
+test_data=vectorizer.transform(test_data)
+number_of_word = train_data.sum(axis=1)
 
 train_label = np.zeros((k,train_data.shape[0]))
 test_label = np.zeros((k,test_data.shape[0]))
+
+vocab_size = train_data.shape[1]
+
+
 for i in range(train_data.shape[0]):
 	train_label[train_tag[i],i]=1
 for i in range(test_data.shape[0]):
 	test_label[test_tag[i],i]=1
 
-
 weights=np.zeros((k,train_data.shape[1])); # weights[i,j]= prob. of jth word of dict. belongs to ith class
 prior=np.zeros((k,1)); # prior[i] = prob. of being ith class
 
-
 #################################################################################
-				# Trinaing the Model
+						# Trinaing the Model
 
-weights = ((train_label*train_data)+1)/(np.reshape(np.sum(train_label,axis=1)+k,[k,1]));
-prior = (np.sum(train_label,axis=1)/train_data.shape[0]);
+weights = ((train_label*train_data)+1)/((train_label*number_of_word)+vocab_size);
+prior = (np.sum(train_label,axis=0)/train_data.shape[0]);
 
-				# Using In-built Naive Bayes
+						# Using In-built Naive Bayes
 
 from sklearn.naive_bayes import MultinomialNB
 clf = MultinomialNB().fit(train_data,train_tag)
 
 
 #################################################################################
-				# Testing and calculating accuracy
+						# Testing and calculating accuracy
 count=0;count_in=0;
 for i_i in range(test_label.shape[1]):
 	temp = weights*np.transpose(test_data[i_i,:])
 	prob=np.zeros((k,1))
-	for i in range(4):
+	for i in range(k):
 		prob[i,0] = prior[i]*temp[i] 
 	if((test_label[np.argmax(prob),i_i]==1.0)):
 		count+=1
@@ -106,9 +97,7 @@ for i_i in range(test_label.shape[1]):
 		count_in+=1;
 
 
-print "accuracy is (using my Implementation of Naive Bayes)...  ",(count/float(test_label.shape[1]))*100," %" 
+print "Accuracy is (using my Implementation of Naive Bayes)...  ",(count/float(test_label.shape[1]))*100," %" 
 print "Accusrcy is (using in built Naive Bayes)...  ",(count_in/float(test_label.shape[1]))*100, " %"	
-
-###################################################################################
 
 ###################################################################################
