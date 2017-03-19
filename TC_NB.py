@@ -1,3 +1,18 @@
+#################################################
+#	Text Classification using Naive Bayes       
+#													
+#	Kuldeep Sharma (19/03/2017)					
+#	Mechanical Engineer @ IIT Delhi			
+#													
+#	Github @Kuldeep_Attri						     
+#												   
+#################################################	
+
+
+
+
+
+
 
 import numpy as np
 import scipy as sp
