@@ -17,7 +17,7 @@ import pickle
 						# Loading data	
 
 results = []
-with open('train.txt') as inputfile:
+with open('Lang_train.txt') as inputfile:
     for line in inputfile:
         results.append(line.strip().split('\t'))
 
@@ -65,7 +65,6 @@ for i in range(len(results1)):
 k=4; # Number of classes
  
 test_data=vectorizer.transform(test_data)
-print test_data.shape
 number_of_word = train_data.sum(axis=1)
 
 train_label = np.zeros((k,train_data.shape[0]))
@@ -123,14 +122,14 @@ for i_i in range(test_label.shape[1]):
  	prob=np.zeros((k,1))
  	for i in range(k):
  		prob[i,0]=np.log(prior[i]) + (temp[i])
- 	# if(np.argmax(prob)+1.0==1.0):
- 	# 	print "",i_i+1,"line is written in English"
- 	# elif(np.argmax(prob)+1.0==2.0):
- 	# 	print "",i_i+1,"line is written in Spanish"
- 	# elif(np.argmax(prob)+1.0==3.0):
- 	# 	print "",i_i+1,"line is written in French"
- 	# elif(np.argmax(prob)+1.0==4.0):
- 	# 	print "",i_i+1,"line is written in German"
+ 	if(np.argmax(prob)+1.0==1.0):
+ 		print "",i_i+1,"line is written in English"
+ 	elif(np.argmax(prob)+1.0==2.0):
+ 		print "",i_i+1,"line is written in Spanish"
+ 	elif(np.argmax(prob)+1.0==3.0):
+ 		print "",i_i+1,"line is written in French"
+ 	elif(np.argmax(prob)+1.0==4.0):
+ 		print "",i_i+1,"line is written in German"
  			
  	if((test_label[np.argmax(prob),i_i]==1.0)):
  		count+=1
