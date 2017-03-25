@@ -39,25 +39,26 @@ from sklearn.feature_extraction.text import CountVectorizer
 vectorizer = CountVectorizer()
 train_data=vectorizer.fit_transform(train_data)
 
+results1=[]
 with open('testfile.txt') as inputfile:
     for line in inputfile:
-        results.append(line.strip().split('\t'))       
+        results1.append(line.strip().split('\t'))       
 
 test_tag =[];test_data=[];
-for i in range(len(results)):
-	if(len(results[i])>1):
-		if(results[i][0]=="student"):
+for i in range(len(results1)):
+	if(len(results1[i])>1):
+		if(results1[i][0]=="student"):
 			test_tag.append(0)
-			test_data.append(results[i][1])
-		elif(results[i][0]=="faculty"):
+			test_data.append(results1[i][1])
+		elif(results1[i][0]=="faculty"):
 			test_tag.append(1)
-			test_data.append(results[i][1])
-		elif(results[i][0]=="project"):
+			test_data.append(results1[i][1])
+		elif(results1[i][0]=="project"):
 			test_tag.append(2)
-			test_data.append(results[i][1])
-		elif(results[i][0]=="course"):
+			test_data.append(results1[i][1])
+		elif(results1[i][0]=="course"):
 			test_tag.append(3)
-			test_data.append(results[i][1])					
+			test_data.append(results1[i][1])					
 	
 k=4; # Number of classes
  
