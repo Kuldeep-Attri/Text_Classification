@@ -1,5 +1,5 @@
 #################################################
-#	Text Classification using Naive Bayes       
+#	Language Classification using Naive Bayes       
 #													
 #	Kuldeep Sharma (19/03/2017)					
 #	Mechanical Engineer @ IIT Delhi			
