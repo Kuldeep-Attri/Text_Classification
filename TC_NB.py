@@ -8,17 +8,9 @@
 #												   
 #################################################	
 
-
-
-
-
-
-
 import numpy as np
 import scipy as sp
 import sklearn
-
-
 
 ###########################################################################
 						# Loading data	
@@ -70,6 +62,7 @@ for i in range(len(results)):
 k=4; # Number of classes
  
 test_data=vectorizer.transform(test_data)
+
 number_of_word = train_data.sum(axis=1)
 
 train_label = np.zeros((k,train_data.shape[0]))
@@ -102,10 +95,10 @@ clf = MultinomialNB().fit(train_data,train_tag)
 						# Testing and calculating accuracy
 count=0;count_in=0;
 for i_i in range(test_label.shape[1]):
-	temp = weights*np.transpose(test_data[i_i,:])
+	temp = np.log(weights)*np.transpose(test_data[i_i,:])
 	prob=np.zeros((k,1))
 	for i in range(k):
-		prob[i,0] = prior[i]*temp[i] 
+		prob[i,0]=np.log(prior[i]) + (temp[i])
 	if((test_label[np.argmax(prob),i_i]==1.0)):
 		count+=1
 	if((test_label[clf.predict(test_data[i_i,:]),i_i]==1.0)):
